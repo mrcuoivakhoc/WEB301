@@ -10,6 +10,19 @@
 <body>
     <div class="container mt-4">
         <h2>Create Product</h2>
+        <div class="container">
+        <div class="row mb-3">
+            <div class="col">
+                @auth
+                
+                        <div>
+                            <span class="me-3">Welcome, {{ Auth::user()->name }}</span>
+                            <a href="/logout" class="btn btn-danger">Logout</a>
+                        </div>
+
+                @endauth
+            </div>
+        </div>
         <form action="/products" method="post">
             @csrf
             <div class="mb-3">

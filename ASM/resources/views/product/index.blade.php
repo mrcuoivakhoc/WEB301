@@ -12,7 +12,15 @@
     <div class="container">
         <div class="row mb-3">
             <div class="col">
-                <a href="/products/create" class="btn btn-primary">Add Product</a>
+                @auth
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="/products/create" class="btn btn-primary">Add Product</a>
+                        <div>
+                            <span class="me-3">Welcome, {{ Auth::user()->name }}</span>
+                            <a href="/logout" class="btn btn-danger">Logout</a>
+                        </div>
+                    </div>
+                @endauth
             </div>
         </div>
         <div class="row">

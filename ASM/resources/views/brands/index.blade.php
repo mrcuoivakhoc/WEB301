@@ -10,9 +10,17 @@
 <body>
     
     <div class="container mt-4">
-    <div class="row mb-3">
+        <div class="row mb-3">
             <div class="col">
-                <a href="/brands/create" class="btn btn-primary">Add brand</a>
+                @auth
+                    <div class="d-flex justify-content-between align-items-center">
+                    <a href="/brands/create" class="btn btn-primary">Add brand</a>
+                        <div>
+                            <span class="me-3">Welcome, {{ Auth::user()->name }}</span>
+                            <a href="/logout" class="btn btn-danger">Logout</a>
+                        </div>
+                    </div>
+                @endauth
             </div>
         </div>
         <h2>Brand List</h2>

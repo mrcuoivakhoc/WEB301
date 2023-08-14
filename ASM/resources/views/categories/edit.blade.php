@@ -10,6 +10,15 @@
 <body>
     <div class="container mt-4">
         <h2>Edit Category</h2>
+        @auth
+                    <div class="d-flex justify-content-between align-items-center">
+                    <a href="/categories/create" class="btn btn-primary">Add categories</a>
+                        <div>
+                            <span class="me-3">Welcome, {{ Auth::user()->name }}</span>
+                            <a href="/logout" class="btn btn-danger">Logout</a>
+                        </div>
+                    </div>
+                @endauth
         <form action="/categories/{{ $category->id }}" method="post">
             @method('PUT')
             @csrf

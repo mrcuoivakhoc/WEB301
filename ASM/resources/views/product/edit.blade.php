@@ -14,6 +14,20 @@
                 <h1>Edit Product</h1>
             </div>
         </div>
+        <div class="container">
+        <div class="row mb-3">
+            <div class="col">
+                @auth
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="/products/create" class="btn btn-primary">Add Product</a>
+                        <div>
+                            <span class="me-3">Welcome, {{ Auth::user()->name }}</span>
+                            <a href="/logout" class="btn btn-danger">Logout</a>
+                        </div>
+                    </div>
+                @endauth
+            </div>
+        </div>
         <div class="row mt-4">
             <div class="col">
                 <form action="/products/{{ $product->id }}" method="post">

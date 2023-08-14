@@ -10,6 +10,15 @@
 <body>
     <div class="container mt-4">
         <h2>Edit Brand</h2>
+        @auth
+                    <div class="d-flex justify-content-between align-items-center">
+                    <a href="/brands/create" class="btn btn-primary">Add brand</a>
+                        <div>
+                            <span class="me-3">Welcome, {{ Auth::user()->name }}</span>
+                            <a href="/logout" class="btn btn-danger">Logout</a>
+                        </div>
+                    </div>
+                @endauth
         <form action="/brands/{{ $brand->id }}" method="post">
             @method('PUT')
             @csrf

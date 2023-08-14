@@ -10,6 +10,14 @@
 <body>
     <div class="container mt-4">
         <h2>Create Brand</h2>
+        @auth
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="me-3">Welcome, {{ Auth::user()->name }}</span>
+                            <a href="/logout" class="btn btn-danger">Logout</a>
+                        </div>
+                    </div>
+                @endauth
         <form action="/brands" method="post">
             @csrf
             <div class="mb-3">

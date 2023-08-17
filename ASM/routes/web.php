@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ Route::get('/', function () {
 });
 
 Route::resource('products', ProductController::class);
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth');
 Route::resource('categories', CategoryController::class);
 Route::resource('brands', BrandController::class);
 Route::resource('customers', CustomerController::class);

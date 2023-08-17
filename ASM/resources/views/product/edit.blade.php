@@ -30,12 +30,21 @@
         </div>
         <div class="row mt-4">
             <div class="col">
-                <form action="/products/{{ $product->id }}" method="post">
+                <form action="/products/{{ $product->id }}" method="post"enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" name="name" id="name" value="{{ $product->name }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        @if($product->image)
+                            <img src="{{ $product->image }}" alt="{{ $product->name }}" width="150" height="130">
+                        @else
+                            <p>No image available</p>
+                        @endif
+                        <input type="file" class="form-control" name="image" id="image">
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>

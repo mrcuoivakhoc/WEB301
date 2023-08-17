@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Product;
@@ -38,6 +39,12 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->brand_id = $request->brand_id;
         $product->category_id = $request->category_id;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/images');
+            $product->image = str_replace('public/', '/storage/', $imagePath);
+        }
+
         $product->save();
         return redirect('/products');
     }
@@ -66,20 +73,24 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    $product = Product::find($id);
+    {
+        $product = Product::find($id);
 
-    $product->name = $request->input('name');
-    $product->description = $request->input('description');
-    $product->price = $request->input('price');
-    $product->brand_id = $request->input('brand');
-    $product->category_id = $request->input('category');
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->brand_id = $request->input('brand');
+        $product->category_id = $request->input('category');
 
-    $product->save();
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/images');
+            $product->image = str_replace('public/', '/storage/', $imagePath);
+        }
 
-    return redirect('/products');
-}
+        $product->save();
 
+        return redirect('/products');
+    }
 
     /**
      * Remove the specified resource from storage.

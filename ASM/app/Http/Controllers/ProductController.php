@@ -6,7 +6,9 @@ use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
+Paginator::useBootstrap();
 class ProductController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(6);
         return view('product.index', ['products' => $products]);
     }
 
@@ -100,5 +102,13 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
         return redirect('/products');
+    }
+    public function search(Request $request)
+    {
+        
+        
+        $keyword = $request->input('search');
+        $products = Product::where('name', 'like', '%' . $keyword . '%')->paginate(6);
+        return view('product.index', compact('products', 'keyword'));
     }
 }

@@ -4,7 +4,10 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Pagination\Paginator;
+Paginator::useBootstrap();
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +29,7 @@ Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(
 Route::resource('categories', CategoryController::class);
 Route::resource('brands', BrandController::class);
 Route::resource('customers', CustomerController::class);
+Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::resources([
     'products' => ProductController::class,
 ]);

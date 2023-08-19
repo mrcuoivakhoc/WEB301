@@ -6,9 +6,9 @@ use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 Paginator::useBootstrap();
+use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     /**
@@ -86,11 +86,12 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('public/images');
+            storage::delete(str_replace('/storage/','public/', $product->image));
+            $product->image = $request->file('image')->store('public/images');
             $product->image = str_replace('public/', '/storage/', $imagePath);
         }
 
         $product->save();
-
         return redirect('/products');
     }
 

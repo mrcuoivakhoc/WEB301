@@ -8,12 +8,18 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Pagination\Paginator;
-use App\Http\Middleware\CheckLogin; // Import middleware class
+use App\Http\Controllers\FrontendController;
 Paginator::useBootstrap();
+
 
 Route::get('/', function () {
     return view('dashboard');
 });
+Route::get('/frontend', [FrontendController::class, 'index']);
+Route::resource('frontend', FrontendController::class);
+
+
+
 
 Route::resource('products', ProductController::class);
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth');
@@ -21,6 +27,8 @@ Route::resource('categories', CategoryController::class);
 Route::resource('brands', BrandController::class);
 Route::resource('customers', CustomerController::class);
 Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::get('/frontend', [FrontendController::class, 'index'])->name('frontend.index');
+
 Route::resources([
     'products' => ProductController::class,
 ]);

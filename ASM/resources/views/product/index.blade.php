@@ -19,7 +19,6 @@
                             <input class="" name="search" placeholder="Keyword">
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>
-                        
                     </div>
                 </li>
             </ul>
@@ -58,8 +57,8 @@
                     </tr>
                 </thead>
                     <tbody>
-                                    @isset($products) <!-- Check if $products is set -->
-                                    @foreach($products as $product)
+                        @isset($products) <!-- Check if $products is set -->
+                        @foreach($products as $product)
                     <tr>
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>

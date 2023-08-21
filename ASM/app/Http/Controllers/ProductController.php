@@ -106,8 +106,6 @@ class ProductController extends Controller
     }
     public function search(Request $request)
     {
-        
-        
         $keyword = $request->input('search');
         $products = Product::where('name', 'like', '%' . $keyword . '%')->paginate(6);
         return view('product.index', compact('products', 'keyword'));

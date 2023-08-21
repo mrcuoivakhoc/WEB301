@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class AuthenticateController extends Controller
 {
     public function loginIndex()
@@ -30,7 +31,7 @@ class AuthenticateController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
  
-            return redirect('/products');
+            return redirect('admin');
         }
  
         return back()->withErrors([
@@ -50,7 +51,7 @@ class AuthenticateController extends Controller
         
         $credentials = $request->only('name', 'email', 'password');
         auth()->attempt($credentials);
-        return redirect('/products');
+        return redirect('admin');
     }
 
     public function logout(Request $request): RedirectResponse

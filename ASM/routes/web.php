@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
@@ -7,21 +8,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Pagination\Paginator;
+use App\Http\Middleware\CheckLogin; // Import middleware class
 Paginator::useBootstrap();
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 Route::resource('products', ProductController::class);
@@ -33,6 +24,18 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::resources([
     'products' => ProductController::class,
 ]);
+
+// Route group for admin
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    });
+
+    Route::resource('products', ProductController::class); // Define resourceful routes for products
+    Route::resource('categories', CategoryController::class); // Define resourceful routes for categories
+    Route::resource('brands', BrandController::class); // Define resourceful routes for brands
+});
+
 
 Route::get('login', [AuthenticateController::class, 'loginIndex'])->name('login');
 Route::post('login', [AuthenticateController::class, 'login']);

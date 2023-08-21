@@ -57,30 +57,30 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @isset($products) <!-- Check if $products is set -->
-                    @foreach($products as $product)
-                            <tr>
-                                <td>{{ $product->id }}</td>
-                                <td>{{ $product->name }}</td>
-                                <td>
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <img src="{{ $product->image }}" alt="{{ $product->name }}" width="150" height="130">
-                                    </div>
-                                </td>
-                                <td>{{ $product->description }}</td>
-                                <td>${{ $product->price }}</td>
-                                <td><a href="/categories/{{ $product->category->id }}">{{ $product->category->name }}</a></td>
-                                <td><a href="/brands/{{ $product->brand->id }}">{{ $product->brand->name }}</a></td>
-                                <td>
-                                    <a href="/products/{{ $product->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="/products/{{ $product->id }}" method="post" style="display: inline">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
+                    <tbody>
+                                    @isset($products) <!-- Check if $products is set -->
+                                    @foreach($products as $product)
+                    <tr>
+                        <td>{{ $product->id }}</td>
+                        <td>{{ $product->name }}</td>
+                        <td>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="{{ $product->image }}" alt="{{ $product->name }}" width="150" height="130">
+                            </div>
+                        </td>
+                        <td>{{ $product->description }}</td>
+                        <td>${{ $product->price }}</td>
+                        <td><a href="/categories/{{ $product->category->id }}">{{ $product->category->name }}</a></td>
+                        <td><a href="/brands/{{ $product->brand->id }}">{{ $product->brand->name }}</a></td>
+                        <td>
+                            <a href="/products/{{ $product->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="/products/{{ $product->id }}" method="post" style="display: inline">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+                            </form>
+                        </td>
+                        </tr>
                             
                         @endforeach
                         

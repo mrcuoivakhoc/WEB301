@@ -28,6 +28,7 @@ Route::resource('brands', BrandController::class);
 Route::resource('customers', CustomerController::class);
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::get('/frontend', [FrontendController::class, 'index'])->name('frontend.index');
+Route::get('/product-detail/{id}', [FrontendController::class, 'productDetail'])->name('frontend.product-detail');
 
 Route::resources([
     'products' => ProductController::class,

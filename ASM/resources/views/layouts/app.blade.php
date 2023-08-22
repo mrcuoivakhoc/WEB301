@@ -52,7 +52,7 @@
         }
         @media (min-width: 768px) {
             .col-md-4 {
-                flex: 33%;
+                
                 width: 33.33333333%;
             }
         }

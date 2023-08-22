@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\productDetail;
 
 class FrontendController extends Controller
 {
@@ -35,5 +36,17 @@ class FrontendController extends Controller
 
     return view('frontend.index', compact('products', 'categories', 'brands', 'keyword'));
 }
+public function productDetail($id)
+{
+    $product = Product::findOrFail($id);
+    $brands = Brand::all(); // Retrieve brands from your database
+    $categories = Category::all(); // Retrieve categories from your database
+    
+    return view('frontend.product-detail', compact('product', 'brands', 'categories'));
+}
+
+
+
+
 
 }

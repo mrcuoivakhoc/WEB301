@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 Paginator::useBootstrap();
 use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
@@ -16,8 +17,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
         $products = Product::paginate(6);
-        return view('product.index', ['products' => $products]);
+        return view('product.index', ['products' => $products, 'user' => $user]);
     }
 
     /**
@@ -103,6 +105,9 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
         return redirect('/products');
+        if ($request->hasFile('image')) {
+            storage::delete(str_replace('/storage/','public/', $product->image));
+        }
     }
     public function search(Request $request)
     {

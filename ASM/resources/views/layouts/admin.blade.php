@@ -121,3 +121,20 @@
   </div>
   <!-- /.sidebar -->
 </aside>
+<div class="content-wrapper">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary mt-3">
+                        <div class="card-header">
+                            <h3 class="card-title">@yield('title')</h3>
+                        </div>
+                        @yield('main')
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+  </div>

@@ -39,11 +39,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     });
-
     Route::resource('products', ProductController::class); // Define resourceful routes for products
     Route::resource('categories', CategoryController::class); // Define resourceful routes for categories
     Route::resource('brands', BrandController::class); // Define resourceful routes for brands
 });
+
 
 
 Route::get('login', [AuthenticateController::class, 'loginIndex'])->name('login');

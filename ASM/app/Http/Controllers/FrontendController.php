@@ -45,8 +45,10 @@ public function productDetail($id)
     return view('frontend.product-detail', compact('product', 'brands', 'categories'));
 }
 
-
-
-
-
+public function showRoom()
+{
+    $brands = Brand::all(); // Retrieve brands from your database
+    $categories = Category::all(); // Retrieve categories from your database
+    return view('frontend.showroom', compact('brands', 'categories'));
+}
 }

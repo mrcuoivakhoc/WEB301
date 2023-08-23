@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +40,7 @@
             font-weight: bold;
         }
         .header-banner {
-            background-image: url('{{ asset('storage/images/showroom7.png') }}');
+            background-image: url('{{ asset('storage/images/showroom.png') }}');
             background-size: cover;
             background-position: center;
             height: 500px; /* Adjust the height as needed */
@@ -50,7 +49,6 @@
             align-self: center;
             width: 253px;
             height: 190px;
-            padding-left: 0px;
         }
         @media (min-width: 768px) {
             .col-md-4 mb-4 {
@@ -130,10 +128,9 @@
 }
 
 img {
-    
-    height: 100%;
-    width: 100%;
-    padding-left: 0%;
+    height: 325px;
+    width: 415px;
+    padding-left: 10%;
 }
 img.VR {
     width: 100%;
@@ -179,11 +176,57 @@ img.VR {
     <div class="header-banner">
     <div class="banner-text">
             <h1>VikingLuxBath</h1>
-            <p>Enhancing Elegance, Elevating Cleanliness.</p>
+            <p>Enhancing Elegance, Elevating Cleanliness</p>
         </div>
     </div>
     <main>
-    @yield('content')
+    <div class="vision">
+        <h2 class="vision-title">YOUR VISION REALISED</h2>
+        <p class="vision-description">
+        Welcome to VikingLuxBath - Your Ultimate Destination for Luxury Bathroom Fixtures!
+         We are delighted to present to you a world of sophistication and elegance,
+          where each bathing experience is elevated to perfection.
+        </p>
+    </div>
+    <div class="image-gallery">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <a href="{{ asset('storage/images/showroom4.jpeg') }}" target="_blank">
+                    <img src="{{ asset('storage/images/showroom4.jpeg') }}" alt="Image 1">
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="{{ asset('storage/images/showroom3.jpg') }}" target="_blank">
+                    <img src="{{ asset('storage/images/showroom3.jpg') }}" alt="Image 2">
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="{{ asset('storage/images/showroom6.jpg') }}" target="_blank">
+                    <img src="{{ asset('storage/images/showroom6.jpg') }}" alt="Image 3">
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <a href="{{ asset('storage/images/showroom5.jpg') }}" target="_blank">
+                    <img src="{{ asset('storage/images/showroom5.jpg') }}" alt="Image 4">
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="{{ asset('storage/images/showroom6.png') }}" target="_blank">
+                    <img src="{{ asset('storage/images/showroom6.png') }}" alt="Image 5">
+                </a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="{{ asset('storage/images/showroom7.png') }}" target="_blank">
+                    <img src="{{ asset('storage/images/showroom7.png') }}" alt="Image 6">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+     <img src="{{ asset('storage/images/VA.png') }}" alt="VR" class="VR">
+     </div>
 </main>
 <footer class="footer">
     <div class="container-3">
@@ -217,7 +260,6 @@ img.VR {
         </div>
     </div>
 </footer>
-
     
     <!-- Link to Bootstrap JS (Optional if you're not using any Bootstrap JavaScript features) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

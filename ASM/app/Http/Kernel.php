@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\AdminMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -67,8 +68,11 @@ class Kernel extends HttpKernel
         
     ];
     protected $routeMiddleware = [
-        // ...
-        'checkLogin' => \App\Http\Middleware\CheckLogin::class,
+        // ... other middleware entries
+    
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'customer' => \App\Http\Middleware\CustomerMiddleware::class,
+
     ];
     
 }

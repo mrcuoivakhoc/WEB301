@@ -31,7 +31,7 @@ class AuthenticateController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
  
-            return redirect('admin');
+            return redirect('/admin/dashboard');
         }
  
         return back()->withErrors([
@@ -51,7 +51,7 @@ class AuthenticateController extends Controller
         
         $credentials = $request->only('name', 'email', 'password');
         auth()->attempt($credentials);
-        return redirect('admin');
+        return redirect('/admin/dashboard');
     }
 
     public function logout(Request $request): RedirectResponse

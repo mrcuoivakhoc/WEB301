@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $user = Auth::user();
         $products = Product::paginate(6);
-        return view('product.index', ['products' => $products, 'user' => $user]);
+        return view('product.index', ['products' => $products]);
     }
 
     /**
@@ -105,9 +105,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
         return redirect('/products');
-        if ($request->hasFile('image')) {
-            storage::delete(str_replace('/storage/','public/', $product->image));
-        }
+        
     }
     public function search(Request $request)
     {

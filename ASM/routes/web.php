@@ -13,7 +13,7 @@ Paginator::useBootstrap();
 
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('login');
 });
 Route::get('/frontend', [FrontendController::class, 'index']);
 Route::resource('frontend', FrontendController::class);
@@ -29,21 +29,26 @@ Route::resource('customers', CustomerController::class);
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::get('/frontend', [FrontendController::class, 'index'])->name('frontend.index');
 Route::get('/product-detail/{id}', [FrontendController::class, 'productDetail'])->name('frontend.product-detail');
+Route::get('/theshowroom', [FrontendController::class, 'showRoom'])->name('frontend.showroom');
 
 Route::resources([
     'products' => ProductController::class,
 ]);
-
-// Route group for admin
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    });
-    Route::resource('products', ProductController::class); // Define resourceful routes for products
-    Route::resource('categories', CategoryController::class); // Define resourceful routes for categories
-    Route::resource('brands', BrandController::class); // Define resourceful routes for brands
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Các route dành cho admin
+    Route::get('/admin/dashboard', [ProductController::class, 'index'])->name('admin.dashboard');
+    Route::post('/admin/dashboard', [ProductController::class, 'index'])->name('admin.dashboard');
+    Route::resource('products', ProductController::class);
+    Route::resource('brands', BrandController::class);
+    Route::resource('categories', CategoryController::class);
 });
 
+// Route::middleware(['auth', 'customer'])->group(function () {
+//     // Các route dành cho customer
+//     Route::get('/frontend', [FrontendController::class, 'index'])->name('frontend.index');
+//     Route::get('/product-detail/{id}', [FrontendController::class, 'productDetail'])->name('frontend.product-detail');
+//     Route::get('/theshowroom', [FrontendController::class, 'showRoom'])->name('frontend.showroom');
+// });
 
 
 Route::get('login', [AuthenticateController::class, 'loginIndex'])->name('login');

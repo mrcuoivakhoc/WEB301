@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
-
+use Illuminate\Pagination\Paginator;
+Paginator::useBootstrap();
 class BrandController extends Controller
 {
     /**
@@ -13,6 +14,7 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::all();
+        $brands = Brand::paginate(6);
         return view('brands.index', ['brands' => $brands]);
     }
 

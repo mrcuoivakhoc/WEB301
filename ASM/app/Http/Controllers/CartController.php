@@ -82,17 +82,29 @@ class CartController extends Controller
     }
 
     public function checkout()
-    {
-        $cart = session()->get('cart', []);
-        $total = 0;
+{
+    $cart = session()->get('cart', []);
+    $total = 0;
 
-        foreach ($cart as $product) {
-            $total += $product['price'] * $product['quantity']; // Tính tổng tiền dựa trên số lượng sản phẩm
-        }
-
-        return view('frontend.cart', compact('cart', 'total'));
+    foreach ($cart as $product) {
+        $total += $product['price'];
     }
 
+    if (Auth::check()) {
+        // Người dùng đã đăng nhập, lưu thông báo vào session
+        session()->flash('checkout_message', 'Order placed successfully! Thank you for your purchase.');
+    } else {
+        // Người dùng chưa đăng nhập, lưu thông báo yêu cầu đăng nhập
+        session()->flash('checkout_message', 'Please log in or register an account before proceeding to payment.');
+    }
+
+    // Xóa giỏ hàng sau khi lưu thông báo
+    session()->forget('cart');
+
+    return redirect()->route('cart'); // Chuyển hướng trở lại trang giỏ hàng
+}
+
+    
 
     public function placeOrder()
     {

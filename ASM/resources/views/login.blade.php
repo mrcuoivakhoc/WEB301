@@ -6,6 +6,49 @@
     <title>Login</title>
     <!-- Add Bootstrap CSS Link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url(http://127.0.0.1:8000/storage/images/login.png);
+            background-size: cover;
+            background-position: inherit;
+        }
+        h2.mb-3 {
+            color: white;
+        }
+        label.form-label {
+            color: white;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity here */
+            backdrop-filter: blur(5px); /* Apply the blur effect */
+        }
+
+        .container {
+            z-index: 1; /* Place the container above the overlay */
+        }
+        .col-md-6 {
+            flex: 0 0 auto;
+            width: 50%;
+            filter: opacity(0.7);
+        }
+                h1 {
+            color: #f7e7b8;
+            padding-left: 26%;
+            font-size: 60px;
+        }
+        p {
+            color: #f7e7b8;
+            padding-left: 28%;
+            font-size: 16px;
+        }
+    </style>
+    
 </head>
 <body>
     <div class="container mt-5">
@@ -23,7 +66,14 @@
                         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
+                    <a href="{{ route('register') }}" class="btn btn-secondary">Register</a>
+
                 </form>
+                <div class="banner-text">
+            <h1>VikingLuxBath</h1>
+            <p>Enhancing Elegance, Elevating Cleanliness</p>
+        </div>
+    </div>
             </div>
         </div>
     </div>

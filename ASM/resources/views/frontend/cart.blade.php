@@ -37,6 +37,9 @@
                 </tr>
             </tfoot>
         </table>
+        @if (session('checkout_message'))
+        <div class="alert alert-info">{{ session('checkout_message') }}</div>
+    @endif
         <a href="{{ route('checkout') }}" class="btn btn-success">Checkout</a>
     </div>
     <script>

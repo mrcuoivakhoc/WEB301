@@ -9,6 +9,8 @@ use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Pagination\Paginator;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\CartController;
+
 Paginator::useBootstrap();
 
 
@@ -22,7 +24,7 @@ Route::resource('frontend', FrontendController::class);
 
 
 Route::resource('products', ProductController::class);
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('admin');
 Route::resource('categories', CategoryController::class);
 Route::resource('brands', BrandController::class);
 Route::resource('customers', CustomerController::class);
@@ -53,8 +55,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::get('login', [AuthenticateController::class, 'loginIndex'])->name('login');
 Route::post('login', [AuthenticateController::class, 'login']);
-
 Route::get('register', [AuthenticateController::class, 'registerIndex'])->name('register');
 Route::post('register', [AuthenticateController::class, 'register']);
-
 Route::get('logout', [AuthenticateController::class, 'logout'])->name('logout');
+
+
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
+Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::post('/cart/place-order', [CartController::class, 'placeOrder'])->name('place-order');
+Route::get('/add-to-cart/{product_id}', [CartController::class, 'addToCart'])->name('add-to-cart');
+Route::get('/remove-from-cart/{product_id}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+

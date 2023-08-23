@@ -22,18 +22,10 @@
                     <!-- Display Brand -->
                     <p class="card-text font-weight-bold">Brand: {{ $product->brand->name }}</p>
                     
-                    <div class="d-flex justify-content-between align-items-center">
-                        <button class="btn btn-primary btn-lg">Add to Cart</button>
-                        <div class="rating">
-                            @for ($i = 1; $i <= 5; $i++)
-                                @if ($i <= $product->rating)
-                                    <span class="fa fa-star checked"></span>
-                                @else
-                                    <span class="fa fa-star"></span>
-                                @endif
-                            @endfor
-                        </div>
-                    </div>
+                    <button class="btn btn-primary btn-lg">
+                    <a href="{{ route('add-to-cart', ['product_id' => $product->id]) }}"class="btn btn-success">Add to cart</a>
+                    </button>
+
                 </div>
             </div>
         </div>
@@ -41,6 +33,3 @@
 </div>
 @endsection
 
-@section('styles')
-
-@endsection

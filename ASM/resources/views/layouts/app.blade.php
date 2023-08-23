@@ -58,6 +58,7 @@
                 width: 33.33333333%;
             }
         }
+            
         .footer {
             background-image: url(http://127.0.0.1:8000/storage/images/banner123.png);
     background-size: cover;
@@ -147,7 +148,23 @@ img.VR {
     padding-top: inherit;
     padding-left: 39%;
 }
-
+a.d-inline-block.me-3 {
+    color: cornflowerblue;
+}
+.btn-primary {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #198754;
+}
+.card-body {
+    height: 257px;
+}
+img.card-img-top.img-fluid {
+    height: 300px;
+}
+img.img-thumbnail {
+    height: 258px;
+    width: 270px;
+}
     </style>
 </head>
 <body>
@@ -175,6 +192,14 @@ img.VR {
             </div>
         </div>
         <a href="#">Contact</a>
+        <a href="/cart">Cart</a>
+        @if (Auth::check())
+                <a href="#" class="d-inline-block me-3">WellCome: {{ Auth::user()->name }}</a>
+            <a href="/logout">Logout</a>
+        @else
+            <a href="/login">Login</a>
+        @endif
+
     </nav>
     <div class="header-banner">
     <div class="banner-text">

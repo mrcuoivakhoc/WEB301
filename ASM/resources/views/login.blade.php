@@ -38,12 +38,12 @@
             filter: opacity(0.7);
         }
                 h1 {
-            color: #f7e7b8;
+            color: #fceeb3;
             padding-left: 26%;
             font-size: 60px;
         }
         p {
-            color: #f7e7b8;
+            color: #fceeb3;
             padding-left: 28%;
             font-size: 16px;
         }

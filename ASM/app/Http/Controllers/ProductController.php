@@ -50,6 +50,9 @@ class ProductController extends Controller
         }
 
         $product->save();
+            // Thêm tag cho sản phẩm
+        $tags = $request->input('tags');
+        $product->tags()->sync($tags);
         return redirect('/products');
     }
 

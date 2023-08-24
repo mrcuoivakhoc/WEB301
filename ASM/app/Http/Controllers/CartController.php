@@ -24,7 +24,8 @@ class CartController extends Controller
         if (!$product) {
             return redirect()->back()->with('error', 'Product not found');
         }
-    
+        //lấy thông tin giỏ hàng từ session. 
+        //Nếu không có thông tin về giỏ hàng trong session, một mảng rỗng sẽ được sử dụng mặc định.
         $cart = session()->get('cart', []);
     
         // Check if product is already in the cart
@@ -36,22 +37,22 @@ class CartController extends Controller
                 $cart[$product_id]['quantity'] = 1;
             }
         } else {
+            //Nếu sản phẩm chưa tồn tại trong giỏ hàng -> tạo mới 
             $cart[$product_id] = [
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => 1,
             ];
         }
-    
+        //lưu thông tin giỏ hàng mới (đã được cập nhật) vào session
         session()->put('cart', $cart);
-    
         return redirect()->route('cart')->with('success', 'Product added to cart successfully');
     }
     
     public function showCart()
     {
-        $brands = Brand::all(); // Retrieve brands from your database
-        $categories = Category::all(); // Retrieve categories from your database
+        $brands = Brand::all(); 
+        $categories = Category::all(); 
         $cart = session()->get('cart', []);
     
         // Tính tổng tiền cho từng sản phẩm trong giỏ hàng và cập nhật giá tiền

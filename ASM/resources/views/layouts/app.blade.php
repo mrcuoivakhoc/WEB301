@@ -80,11 +80,11 @@
             color: #f7e7b8;
         }
         .header {
-    background-image: url(http://127.0.0.1:8000/storage/images/banner123.png);
-    background-size: cover;
-    background-position: center;
-    height: 360px;
-}
+            background-image: url(http://127.0.0.1:8000/storage/images/banner123.png);
+                background-size: cover;
+                background-position: center;
+                height: 360px;
+            }
 
 .banner img {
     width: 100%;
@@ -156,7 +156,7 @@ a.d-inline-block.me-3 {
         --bs-btn-bg: #198754;
 }
 .card-body {
-    height: 257px;
+    height: auto;
 }
 img.card-img-top.img-fluid {
     height: 300px;
@@ -164,6 +164,12 @@ img.card-img-top.img-fluid {
 img.img-thumbnail {
     height: 258px;
     width: 270px;
+}
+footer.footer {
+    margin-top: 10%;
+}
+ul.pagination {
+    margin-top: 0%;
 }
     </style>
 </head>

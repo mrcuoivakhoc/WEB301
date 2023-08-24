@@ -10,6 +10,8 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Pagination\Paginator;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\TagController;
+
 
 Paginator::useBootstrap();
 
@@ -32,17 +34,19 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::get('/frontend', [FrontendController::class, 'index'])->name('frontend.index');
 Route::get('/product-detail/{id}', [FrontendController::class, 'productDetail'])->name('frontend.product-detail');
 Route::get('/theshowroom', [FrontendController::class, 'showRoom'])->name('frontend.showroom');
+Route::resource('tags', TagController::class);
 
 Route::resources([
     'products' => ProductController::class,
 ]);
 Route::middleware(['auth', 'admin'])->group(function () {
-    // Các route dành cho admin
     Route::get('/admin/dashboard', [ProductController::class, 'index'])->name('admin.dashboard');
     Route::post('/admin/dashboard', [ProductController::class, 'index'])->name('admin.dashboard');
     Route::resource('products', ProductController::class);
     Route::resource('brands', BrandController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('tags', TagController::class);
+
 });
 
 // Route::middleware(['auth', 'customer'])->group(function () {

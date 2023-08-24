@@ -24,7 +24,9 @@
                 @foreach($tag->products as $product)
                     <tr>
                         <td>{{ $product->id }}</td>
-                        <td>{{ $product->name }}</td>
+                        <td>
+                            <a href="{{ route('products.show', $product->id) }}">{{ $product->name }}</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

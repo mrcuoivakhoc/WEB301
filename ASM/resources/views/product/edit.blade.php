@@ -67,6 +67,15 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-3">
+                    <label class="form-label">Tags</label>
+                        @foreach($tags as $tag)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="tags[]" id="tag{{ $tag->id }}" value="{{ $tag->id }}" {{ in_array($tag->id, $productTags) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="tag{{ $tag->id }}">{{ $tag->name }}</label>
+                            </div>
+                        @endforeach
+                    </div>
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </form>
             </div>

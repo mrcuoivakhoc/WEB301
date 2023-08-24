@@ -13,10 +13,15 @@
                 </tr>
             </thead>
             <tbody>
+            <div class="d-flex justify-content-between align-items-center">
+                    <a href="/tags/create" class="btn btn-primary">Add Tag</a>
+                </div>
                 @foreach($tags as $tag)
                     <tr>
                         <td>{{ $tag->id }}</td>
-                        <td>{{ $tag->name }}</td>
+                        <td>
+                            <a href="{{ route('tags.show', $tag->id) }}">{{ $tag->name }}</a>
+                        </td>
                         <td>{{ $tag->description }}</td>
                         <td>
                             <a href="/tags/{{$tag->id}}/edit" class="btn btn-warning">Edit</a>

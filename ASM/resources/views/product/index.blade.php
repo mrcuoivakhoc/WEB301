@@ -18,8 +18,6 @@
         </div>
     </div>
 </nav>
-
-   
 <div class="container">
     <div class="row mb-3">
         <div class="col">
@@ -42,6 +40,7 @@
                         <th>Price</th>
                         <th>Category</th>
                         <th>Brand</th>
+                        <th>Tag</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -60,6 +59,11 @@
                         <td>${{ $product->price }}</td>
                         <td><a href="/categories/{{ $product->category->id }}">{{ $product->category->name }}</a></td>
                         <td><a href="/brands/{{ $product->brand->id }}">{{ $product->brand->name }}</a></td>
+                        <td>
+                            @foreach($product->tags as $tag)
+                                <span class="badge bg-primary">{{ $tag->name }}</span>
+                            @endforeach
+                        </td>
                         <td>
                             <a href="/products/{{ $product->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
                             <form action="/products/{{ $product->id }}" method="post" style="display: inline">

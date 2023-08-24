@@ -8,6 +8,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Tag;
+
 
 // ... existing imports ...
 
@@ -52,6 +54,7 @@ class CartController extends Controller
     public function showCart()
     {
         $brands = Brand::all(); 
+        $tags = Tag::all();
         $categories = Category::all(); 
         $cart = session()->get('cart', []);
     
@@ -67,7 +70,7 @@ class CartController extends Controller
             }
         }
     
-        return view('frontend.cart', compact('brands', 'categories', 'cart'));
+        return view('frontend.cart', compact('brands', 'categories', 'cart', 'tags'));
     }
       
     public function removeFromCart($product_id)

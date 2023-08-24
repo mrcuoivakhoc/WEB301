@@ -7,6 +7,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\productDetail;
+use App\Models\Tag;
+
 
 class FrontendController extends Controller
 {
@@ -41,14 +43,17 @@ public function productDetail($id)
     $product = Product::findOrFail($id);
     $brands = Brand::all(); // Retrieve brands from your database
     $categories = Category::all(); // Retrieve categories from your database
+    $tags = Tag::all(); // Retrieve tags from your database
+
     
-    return view('frontend.product-detail', compact('product', 'brands', 'categories'));
+    return view('frontend.product-detail', compact('product', 'brands', 'categories', 'tags'));
 }
 
 public function showRoom()
 {
     $brands = Brand::all(); // Retrieve brands from your database
     $categories = Category::all(); // Retrieve categories from your database
-    return view('frontend.showroom', compact('brands', 'categories'));
+    $tags = Tag::all();
+    return view('frontend.showroom', compact('brands', 'categories', 'tags'));
 }
 }

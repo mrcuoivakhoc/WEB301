@@ -35,6 +35,8 @@ Route::get('/frontend', [FrontendController::class, 'index'])->name('frontend.in
 Route::get('/product-detail/{id}', [FrontendController::class, 'productDetail'])->name('frontend.product-detail');
 Route::get('/theshowroom', [FrontendController::class, 'showRoom'])->name('frontend.showroom');
 Route::resource('tags', TagController::class);
+Route::get('/products/{id}', 'ProductController@show')->name('products.show');
+Route::get('/tags/{id}', 'TagController@show')->name('tags.show');
 
 Route::resources([
     'products' => ProductController::class,

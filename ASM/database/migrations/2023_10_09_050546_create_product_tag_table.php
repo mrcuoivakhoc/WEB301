@@ -1,14 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
+class CreateProductTagTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
     {
         Schema::create('product_tag', function (Blueprint $table) {
@@ -16,20 +13,16 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('tag_id');
             $table->timestamps();
-
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+            $table->index(['product_id', 'tag_id']);
+            $table->foreign('product_id')->constrained('products')->onDelete('cascade');
+            $table->foreign('tag_id')->rconstrained('tags')->onDelete('cascade');
         });
     }
-
-
-
-    /**
-     * Reverse the migrations.
-     */
     public function down()
     {
         Schema::dropIfExists('product_tag');
     }
-
 };
+
+
+

@@ -21,7 +21,12 @@
                     
                     <!-- Display Brand -->
                     <p class="card-text font-weight-bold">Brand: {{ $product->brand->name }}</p>
-                    
+                    <h5>Tags:</h5>
+                    <div class="mb-2">
+                        @foreach ($product->tags as $tag)
+                            <span class="badge bg-primary">{{ $tag->name }}</span>
+                        @endforeach
+                    </div>
                     <button class="btn btn-primary btn-lg">
                     <a href="{{ route('add-to-cart', ['product_id' => $product->id]) }}"class="btn btn-success">Add to cart</a>
                     </button>

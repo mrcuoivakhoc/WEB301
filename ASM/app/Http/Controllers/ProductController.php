@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Brand;
+use App\Models\Tag;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 Paginator::useBootstrap();
 use Illuminate\Support\Facades\Storage;
+
 class ProductController extends Controller
 {
     /**
@@ -22,19 +24,13 @@ class ProductController extends Controller
         return view('product.index', ['products' => $products]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $brands = Brand::all();
         $categories = Category::all();
-        return view('product.create', ['brands' => $brands, 'categories' => $categories]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+        $tags = Tag::all(); // Lấy danh sách tag
+        return view('product.create', ['brands' => $brands, 'categories' => $categories, 'tags' => $tags]);
+    }  
     public function store(Request $request)
     {
         $product = new Product();
@@ -51,8 +47,8 @@ class ProductController extends Controller
 
         $product->save();
             // Thêm tag cho sản phẩm
-        $tags = $request->input('tags');
-        $product->tags()->sync($tags);
+            $tags = $request->input('tags');
+            $product->tags()->attach($tags);
         return redirect('/products');
     }
 
@@ -69,12 +65,24 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        $product = Product::find($id);
-        $brands = Brand::all();
-        $categories = Category::all();
-        return view('product.edit', ['product' => $product, 'brands' => $brands, 'categories' => $categories]);
-    }
+{
+    $product = Product::find($id);
+    $brands = Brand::all();
+    $categories = Category::all();
+    $tags = Tag::all(); // Assuming Tag is the model for your tags
+    
+    // Get the IDs of tags associated with the product
+    $productTags = $product->tags->pluck('id')->toArray();
+    
+    return view('product.edit', [
+        'product' => $product,
+        'brands' => $brands,
+        'categories' => $categories,
+        'tags' => $tags,
+        'productTags' => $productTags, // Pass the array of tag IDs to the view
+    ]);
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -88,6 +96,8 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->brand_id = $request->input('brand');
         $product->category_id = $request->input('category');
+        
+        
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('public/images');
@@ -95,7 +105,8 @@ class ProductController extends Controller
             $product->image = $request->file('image')->store('public/images');
             $product->image = str_replace('public/', '/storage/', $imagePath);
         }
-
+        $tags = $request->input('tags');
+        $product->tags()->sync($tags);
         $product->save();
         return redirect('/products');
     }

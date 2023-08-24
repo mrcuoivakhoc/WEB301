@@ -19,8 +19,11 @@
                                     <p>Brand: {{ $item['product']->brand->name }}</p>
                                     <p>Category: {{ $item['product']->category->name }}</p>
                                     <p>{{ $item['product']->description }}</p>
+                                    <h5>Tags:</h5>
+                                @foreach ($item['product']->tags as $tag)
+                                    <span class="badge bg-primary">{{ $tag->name }}</span>
+                                @endforeach
                                 </div>
-                            </div>
                         <td>${{ $item['price'] }}</td>
                         <td class="total">${{ $item['total'] }}</td> <!-- Hiển thị tổng tiền cho từng sản phẩm -->
                         <td>
